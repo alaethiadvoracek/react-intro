@@ -7,15 +7,22 @@ class App extends Component {
 
   constructor(){
     super()
-    this.state = {starList: [{name: 'Fomalhaut', diameter: '2mi' },{name: 'Elnath', diameter: '3.63 million mi'},{name: 'Gacrux', diameter: '117 million km' }, {name: 'Deneb', diameter: '175.58 million mi'} ]}
+    this.state = {starList: [{name: 'Fomalhaut', diameter: 'Diameter: 2mi' },{name: 'Elnath', diameter: 'Diameter: 3.63 million mi'},{name: 'Diameter: Gacrux', diameter: 'Diameter: 117 million km' }, {name: 'Deneb', diameter: 'Diameter: 175.58 million mi'} ]}
   }
-
+//when the document is ready 
+  componentDidMount(){
+    this.getPlanets();
+  }
 
   getPlanets() {
     axios.get('https://swapi.co/api/planets/?format=json')
     .then((response) => {
-      console.log(response)
+      console.log(response);
+      this.setState({starList: response.data.results});
     })
+    .catch((error) => {
+      alert('something went wrong!!');
+    });//end catch error
   }
   render() {
   
